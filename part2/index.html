@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            const fun = () => {
+                alert('button was clicked'); 
+            }
+
+            //16
+            // $('button').click(fun);
+
+            //17
+            // $('button').bind('click', fun);
+
+            //18
+            // $('button').on('click', fun);
+
+            //19
+            // $('button').on('click', fun);
+
+            //20
+            // $('div').width('400px');
+            // $('div').height('400px');
+            // $('div').on('mouseenter mouseleave click', fun);
+
+            //21
+            $('div').width('400px');
+            $('div').height('400px');
+            $('div').on('mouseenter mouseleave click', (event) => {
+                if(event.type === 'mouseenter'){
+                    $('div span').html("You've entered the div");
+                }
+                if(event.type === 'mouseleave'){
+                    $('div span').html("You've left the div");
+                }
+                if(event.type === 'click'){
+                    $('div span').html("You've clicked the div");
+                }
+            });
+
+            //22
+            $('a').click((e) => {
+                e.preventDefault();
+                const a = $('this');
+                a.css('color', 'red');
+                alert(event.target.nodeName);
+            });
+
+            //23
+            const displaySize = function (){
+                $('div').last().html(`Width : ${window.innerWidth}, Height: ${window.innerHeight}`);
+            };
+            displaySize();
+            $(window).on('resize', displaySize);
+
+            //24
+            $('input').on('focusin focusout', (e) => {
+                console.log(e.type);
+                $('input').css('background', `${e.type === 'focusin' ? 'lightgrey' : 'white'}`);
+            });
+
+            //25
+            $('form button').on('click', (e) => {
+                const name = $('form input').first();
+                const email = $('form input').last();
+                if(name.val() === '' || email.val() === ''){
+                    alert("name and email are required");
+                }
+                if(name.val() === ''){
+                    name.css('border', "1px solid red");
+                }
+                if(email.val() === ''){
+                    email.css('border', "1px solid red");
+                    e.preventDefault();
+                }
+                
+            });
+        });
+    </script>
+</head>
+<body>
+    <button>Click Me</button>
+
+    <button>CLick Me 2</button>
+
+    <div>Im a div
+        <span></span>
+    </div>
+
+    <a href="modulemedia.com">Click this link</a>
+
+    <div></div>
+
+    <input />
+
+    <form>
+        Name:<input /><br>
+        Email:<input /><br>
+        <button>Submit</button>
+    </form>
+    
+</body>
+</html>
